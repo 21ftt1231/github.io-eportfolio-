@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+		<style type="text/css">
+			img{width: 300px;height: 250px;}
+			.fs{font-size: 2em}
+			.dc{color: darkcyan;}
+
+			/*.cn{font-family: "courier new"}*/
+			input[type="text"],h3{font-family: "courier new"}
+			/*ATT SELECTOR - []*/
+
+			/*.samewidth{width: 200px;}*/
+  			input[class]{width: 200px;}
+  			/*this is ATT SELECTOR,search for input that have attribute class*/
+
+			/*li.italic{font-style:italic;}*/
+			li:nth-child(even){font-style:italic;}
+			/*PSEUDO SELECTOR*/
+			/*li:nth-child(odd){font-style:italic;}
+			  li:nth-child(3n){font-style:italic;}
+			  li:nth-child(2n+1){font-style:italic;}
+			  li:nth-child(1){font-style:italic;}*/
+
+			input{display: block;}
+			
+/*			.turq{border: 3px solid turquoise;}*/
+			img[src^="assets/images/my/"]{border: 3px solid turquoise;}
+			/*this is ATT SELECTOR, ^means the same source*/
+
+			/*.border{border: 1px solid;}*/
+			div, h3, .border{border: 1px solid;}
+
+			/*.navy{border-color: navy}*/
+			input[class~="border"]{border-color: navy}
+			/*another ATT SELECTOR, having class that has 'border'*/
+
+			div{width: 150px;height: 100px}
+			/*div#d2{display: none}*/ /*to be removed*/
+			/*div#d2{visibility: hidden}*//*hidden but take up space*/
+			div#d1{padding: 10px; box-sizing: border-box;}
+			div#d2{padding: 50px;}
+			div#d3{margin-left: 10px} /*shift element away*/
+		</style>
+	
+</head>
+<body>
+<p class="fs dc">Here is my favorite pictures</p>
+<img src="assets/images/th/t-1.jpg" alt="">
+<!-- <img src="assets/images/my/m-1.jpg" class="turq" alt=""> 
+<img src="assets/images/my/m-2.jpg" class="turq" alt=""> -->
+<img src="assets/images/my/m-1.jpg" alt=""> 
+<img src="assets/images/my/m-2.jpg" alt="">
+<img src="assets/images/th/t-2.jpg" alt="">
+<p>Just a form</p>
+<form action="">
+	<!-- <input type="text" class="cn samewidth border navy" placeholder="name" name="fullname">
+	<input type="text" class="cn samewidth border navy" placeholder="fone" name="fone">
+	<input type="email" class="samewidth border navy" placeholder="email" name="email">
+	<input type="number" class="samewidth border navy" name="captcha" placeholder="5x2">
+	<input type="submit"> -->
+
+	<!-- <input type="text" class="cn border navy" placeholder="name" name="fullname">
+	<input type="text" class="cn border navy" placeholder="fone" name="fone"> -->
+
+	<!-- <input type="text" class="border navy" placeholder="name" name="fullname">
+	<input type="text" class="border navy" placeholder="fone" name="fone">
+	<input type="email" class="border navy" placeholder="email" name="email">
+	<input type="number" class="border navy" name="captcha" placeholder="5x2"> -->
+	<input type="text" class="border" placeholder="name" name="fullname">
+	<input type="text" class="border" placeholder="fone" name="fone">
+	<input type="email" class="border" placeholder="email" name="email">
+	<input type="number" class="border" name="captcha" placeholder="5x2">
+	<input type="submit">
+</form>
+<h3 class="border">here is list of my songs</h3>
+<ol class="dc">
+	<li>Dimana janji mu dulu</li>
+	<li>Insan ku sayang menghilang</li>
+	<li>Resah kerinduan</li>
+	<li>Mengusung rindu</li>
+	<li>Malam semakin dingin</li>
+	<li>Haruskah kita berpisah</li>
+	<li>Salah apa aku</li>
+	<li>Salam terakhir</li>
+</ol>
+<p>to tell difference</p>
+<div id="d1">im a border box</div>
+<div id="d2">content box</div>
+<div id="d3">another</div>
+</body>
+</html>

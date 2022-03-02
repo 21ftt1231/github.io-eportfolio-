@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>week 5-2</title>
+	
+	<style type="text/css">
+	
+	/*.red{color: red;}*/
+	/*div p{color: red}*/ /*all cucu cicit pun change*/
+	/*div>p{color: red}*/
+	div>h2, div>span>p{color: red} /*is this MULTIPLE SELECTOR*/
+	</style>
+</head>
+<!-- <body> is parent, <div><p><span><h2> are children
+	 if we apply style to the parent, EVERYTHING WITHIN
+	 the tag will INHERIT the style-->
+
+<!-- body{color: red} adding specific styling onto <div> tag,
+	 div{color: blue} would override the inheritance.
+	 p{color: green} this override <div> so <p> will be green -->
+<body>
+	<div>
+		<h2>I am H2</h2>
+		<h3>Im a h3</h3>	
+		<h3>yet another h3</h3>
+   <!-- <p class="red">Im a P in a div</p>
+		<p class="red">Im also P in a div</p> -->
+		<p>Im a P in a div</p>
+		<p>Im also P in a div</p>
+		<span>
+	<!--<p class="red">I am a child of span</p> -->
+			<p>I am a child of span</p> <!-- make this red -->
+		</span>
+	</div>
+	<p>im outside p</p>
+	<span>im span outside div <p>S1</p></span>
+	<h2>im h2 outside div</h2>
+</body>
+<hr size="1">
+
+<head>
+	<style type="text/css">
+	
+	/*div+p{color: red} adjacent, the first/direct p under div*/
+    /*body>p{color: red;}* child/
+	/*div~p{color: red;} general*/
+	#red{color: blue;}
+	#red>p{color: red;}
+
+	</style>
+</head>
+<body>
+	<div id="red">
+	 	<p>Im the first child of 1st div</p>
+	 	<p>Im the second child of 1st div</p>
+	 	<span>im the 3rd child of 1st div</span>
+	 </div>
+	 <p>I am the next sibling just after 1st div</p>
+	 <p>I am the second sibling just after 1st div</p>
+	 <div>
+	 	<p>I am the first child of the 2nd div</p>
+	 </div>
+	 <p>Iam the next sibling after the 2nd div</p>
+	 <p>I am the second sibling just after 2nd div</p>
+	 <p>I am the thirsd sibling just after 2nd div</p>
+</body>
+
+</html>
+
+<!-- id selector
+class selector
+element selector
+descendant selector
+multiple selector 
+child selector
+adjacent selector
+general selector
+attribute selector
+pseudo selector-->
+

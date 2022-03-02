@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Week 6-2</title>
+    <style type="text/css">  
+     .parent-element {
+        /*position: relative;*/
+        height: 150px;
+        padding:   10px;
+        background-color: #81adc8;
+    }
+    .main-element {
+        /*position: fixed;*/
+        /*FIXED; scrolling inda affected, no need parents punya position property*/
+        position: absolute; /*position: static; left and bottom wont take effect*/
+        left: 10px;         /*position: absolute; went out of box*/
+        top: 10px;          /*if parent has position: relative; main element put inside*/
+        background-color: yellow;
+        padding: 10px;
+    }
+
+    .sibling-element {
+        padding: 10px;
+        background-color: #f2f2f2;
+    }
+
+  
+
+
+    </style>
+</head>
+<body>
+ <div class="parent-element">
+            <div class="sibling-element">
+                I'm the other sibling element.
+            </div>
+            
+            <div class="main-element">
+                All eyes on me. I am the main element.
+            </div>
+            
+            <div class="sibling-element">
+                I'm the other sibling element.
+            </div>
+</div>
+</body>
+</html>
