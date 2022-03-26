@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" fcontent="width=device-width, initial-scale=1">
+	<title>Week 7 ePortfolio part 3</title>
+	<style type="text/css">
+		body{justify-content: center;}
+
+		form{
+			display: flex;
+  			flex-direction: column;
+			padding: 10px;
+			height: 100px;
+			width: 400px;
+			margin: auto;
+			}
+
+		form>div{
+			width: 200px;
+  			margin: auto;
+  			text-align: center;
+			padding: 10px;
+			}
+
+		.center{text-align: center;}
+		
+
+
+	</style>
+</head>
+<body>
+<form method="" action="">
+
+	<div><label for="nama">Fullname</label>
+	<input type="text" name="nama" id="nama"  maxlength="30"></div>
+
+	<div><label for="email">Email</label>
+	<input type="email" name="email" id="email" ></div>
+
+	<div><label for="date">Date you can start</label>
+	<input type="date" name="date" id="date" ></div>
+
+	<div><label for="time">Morning shift preference</label>
+	<input type="time" name="time" id="time" ></div>
+	
+	<div><label for="time">Night shift preference</label>
+	<input type="time" name="time" id="time" ></div>
+
+	<div><label for="points">How many hours can you work? In multiple of 3</label>
+	<input type="number" name="points" id="points" step="3" min="3" max="9" ></div>
+
+	<div><label>Distance you willing to commute to volunteer center?</label>
+	<label >1<input type="range" min="1" max="15" value="3" name="sld">15</label></div>
+	
+	
+	<div><label for="number"> Your currency preference for payment?</label>
+		<label >
+			<label for="pounds">&#163;</label><input type="radio" name="number" id="pound">
+			<label for="yen">&#165;</label><input type="radio" name="number" id="yen">
+			<label for="euro">&#128;</label><input type="radio" name="number" id="euro">
+		</label>
+	</div>
+	
+
+	<div class="center"><textarea id="text" name="text" rows="6" cols="40" placeholder="Type your home adress" pattern="[.]" ></textarea></div>
+		
+	
+	<div class="center"><strike><strong>You will be given daily meals</strong></strike></div>
+	
+	
+	<div class="center"><strong><input  type="checkbox" value="rendered-checked" checked>I agree to all terms and conditions</strong></div>
+	
+	
+	<div class="center"><strong>Prove you are not robot: 10 &#60; 20<input type="checkbox" ></strong></div>
+	
+	
+	<div class="center"><strong><input type="submit" name="submit" value="Volunteer now!" ></strong></div>
+	
+	
+	<div class="center"><strong><input type="reset" name="reset" value="Start over" ></strong></div>
+	
+	
+	 <div class="center">For more information, visit MOH <a href="https://www.moh.gov.bn/Pages/Home.aspx" >website</a></div>
+	
+
+
+</form>
+
+</body>
+</html>
