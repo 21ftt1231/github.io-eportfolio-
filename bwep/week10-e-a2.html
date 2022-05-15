@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>wk10-e-a</title>
+  <style>
+    #container{display: grid; width: 70%;margin: 0 auto;grid-template-columns:2fr 2fr 2fr 1fr ;grid-auto-rows: 3em;}
+   
+    /*no additional css is required*/
+
+  </style>
+</head>
+<!-- do not insert additional id attributes to any element -->
+<!-- do not remove any inline styles -->
+<body onload="hideAllContent()">
+  <form id="myform" action="" onsubmit="return false">
+  <div id="container">
+<h3 style="grid-column: 1/span 4">College Admission Calculator</h3>
+<div style="grid-column: 1/span 4;">Please enter the required information</div>
+<div>Are you over 25?</div>
+<div>
+<select name="" id="adult" onchange="displayContent()">
+  <option value="0">select</option>
+  <option value="under25">Under 25</option>
+  <option value="over25">Over 25</option>
+</select>
+</div>
+<div style="grid-column:auto/span 2"></div>
+
+
+<div></div><div>subject/exam</div><div>subject grades</div><div>points</div>
+
+  <div class="hideall matured">English Language or Equivalent</div>
+  <div class="hideall matured">
+    <input type="radio" name="english" onchange="showenggrade()">GCE O Level
+    <input type="radio" name="english" onchange="showenggrade()">IGCE O level
+    <input type="radio" name="english" onchange="showenggrade()">IELTS
+  </div>
+<div class="hideall matured">
+    <select name="engolevel" id="engolevel" onchange="enggradepoints()">
+    <option value="0">select</option>
+      <option value="A1">A1</option>
+      <option value="A2">A2</option>
+      <option value="B3">B3</option>
+      <option value="B4">B4</option>
+      <option value="C5">C5</option>
+      <option value="C6">C6</option>
+      <option value="F">F</option>
+    </select>
+     <select name="engigcse" id="engigcse" onchange="enggradepoints()">
+    <option value="0">select</option>
+      <option value="A*">A*</option>
+      <option value="A">A</option>
+      <option value="B">B</option>
+      <option value="C">C</option>
+      <option value="D">D</option>
+      <option value="E">E</option>
+      <option value="F">F</option>
+    </select>
+        <select name="engielts" id="engielts" onchange="enggradepoints()">
+      <option value="0">select</option>
+    <option value="9.0">9.0</option>
+      <option value="8.5">8.5</option>
+      <option value="8.0">8.0</option>
+      <option value="7.5">7.5</option>
+      <option value="7.0">7.0</option>
+      <option value="6.5">6.5</option>
+      <option value="6.0">6.0</option>
+    </select>
+</div>
+<div class="hideall matured" id="engpoints"></div>
+
+
+  <div class="hideall matured">Mathematics</div>
+  <div class="hideall matured">
+    <select name="maths" id="maths" onchange="disablemaths()">
+      <option value="0">select</option>
+      <option value="mathematics D">mathematics D</option>
+      <option value="additional mathematics">additional mathematics</option>
+  </select>
+</div>
+
+<div class="hideall matured">
+    <select name="mathsgrade" id="mathsgrade" onchange="mathsgradepoints()">
+      <option value="0">select</option>
+      <option value="A1">A1</option>
+      <option value="A2">A2</option>
+      <option value="B3">B3</option>
+      <option value="B4">B4</option>
+      <option value="C5">C5</option>
+      <option value="C6">C6</option>
+      <option value="F">F</option>
+    </select>
+</div>
+
+<div class="hideall matured" id="mathspoints"></div>
+
+<div class="hideall">Relevant subject #1</div>
+<div class="hideall">
+    <select name="relevant1" id="relevant1" onchange="relevant1cs()">
+      <option value="0">select</option>
+      <option value="computer studies">computer studies</option>
+      <option value="computer sciences">computer sciences</option>
+      <option value="mathematics D">mathematics D</option>
+      <option value="additional mathematics">additional mathematics</option>
+    </select>
+</div>
+
+<div class="hideall">
+    <select name="relevant1grade" id="relevant1grade" onchange="relevantgradepoints()">
+      <option value="0">select</option>
+      <option value="A1">A1</option>
+      <option value="A2">A2</option>
+      <option value="B3">B3</option>
+      <option value="B4">B4</option>
+      <option value="C5">C5</option>
+      <option value="C6">C6</option>
+      <option value="F">F</option>
+    </select>
+</div>
+
+<div class="hideall" id="relevant1points"></div>
+
+<div class="hideall matured"><button id="btnresult" onclick="eligibilitycheck()" style="align-self: center;">Click to show eligibility status</button></div><div class="hideall matured" style="grid-column:2/span 2" id="status"></div>
+<div class="hideall matured" id="totalpoints"></div>
+<div style="grid-column:1/span 3"></div><div><button onclick="resetbutton()">reset form</button></div>
+
+</div>
+</form>
+<script> 
+ //write all the required functions here
+ //indentation is important
+ //also neatness
+
+ //repitition is not in the syllabus. but students may use loop since  they learnt this concept in ITP
+//  you are expected to use since covered in the classes:
+// function with parameters
+// getElementsByName
+// getElementsById
+
+// additionally
+// getElementsByClassName
+
+// style.visibility .display
+
+  var adult = document.getElementById("adult");
+  var formContent = document.getElementsByClassName("hideall");
+  var maturedContent = document.getElementsByClassName("matured");
+
+  var eng1 = document.getElementById("engolevel");
+  var eng2 = document.getElementById("engigcse");
+  var eng3 = document.getElementById("engielts");
+
+  var maths = document.getElementById("maths");
+  var mathsgrade = document.getElementById("mathsgrade");
+  var relevant1 = document.getElementById("relevant1");
+  var relevant1grade = document.getElementById("relevant1grade");
+  var btnresult = document.getElementById("btnresult");
+
+  var showegrade = document.getElementsByName("english");
+
+  var engpoints = document.getElementById("engpoints");
+  var mathspoints = document.getElementById("mathspoints");
+  var relevant1points = document.getElementById("relevant1points");
+
+  var totalp, engp, mathsp, relevant1p;
+
+  var displaystatus = document.getElementById("status");
+  var totalpoints = document.getElementById("totalpoints");
+
+// -------------------------------------------------------------------------
+// the following function 'hideAllContent()' is used to hide all the content that contains "hideall" class name when the page is loaded
+
+  function hideAllContent() {
+
+    // loop used to hide all the targetted content
+    if (adult.options[adult.selectedIndex].value == "0") {
+      for (var i = 0 ; i < formContent.length ; i++) {
+        formContent[i].style.display = "none";
+      } 
+    }
+  }
+
+// -------------------------------------------------------------------------
+// the following function 'displayContent()' is used to check user input for the age check
+
+  function displayContent() {
+
+    // same code used on line 178 - 182, but this one resets the form when selected
+    // used to check if the 'selected'/default value is being selected
+    if (adult.options[adult.selectedIndex].value == "0") {
+      resetform();
+      for (var i = 0 ; i < formContent.length ; i++) {
+        formContent[i].style.display = "none";
+      }
+    }
+
+    // used to check if under25 option is selected
+    else if (adult.options[adult.selectedIndex].value == "under25") {
+
+      // reset form upon selecting
+      resetform();
+
+      // loop to display all hidden content previously
+      for (var i = 0 ; i < formContent.length ; i++) {
+        formContent[i].style.display = "block";
+      }
+
+      // hide the english grade
+      eng1.style.display = "none";
+      eng2.style.display = "none";
+      eng3.style.display = "none";
+
+      // disable the following so user can't access
+      maths.disabled = true;
+      mathsgrade.disabled = true;
+      relevant1.disabled = true;
+      relevant1grade.disabled = true;
+      btnresult.disabled = true;
+    }
+
+    // last else if is used to check if above25 option is selected
+    else if (adult.options[adult.selectedIndex].value == "over25") {
+
+      // reset form upon selecting
+      resetform();
+
+      // loop to hide all 'hideall' content
+      for (var i = 0 ; i < formContent.length ; i++) {
+        formContent[i].style.display = "none";
+      } 
+
+      // loop to re-display only the 'matured' option
+      for (var j = 0 ; j < maturedContent.length ; j++) {
+        maturedContent[j].style.display = "block";
+      }
+
+      // hide english grade
+      eng1.style.display = "none";
+      eng2.style.display = "none";
+      eng3.style.display = "none";
+
+      // disable the following so user can't access
+      maths.disabled = true;
+      mathsgrade.disabled = true;
+      btnresult.disabled = true;
+    }
+  }
+
+// -------------------------------------------------------------------------
+// the following function 'showenggrade()' is used to display the necessary grade for the selected english exam type
+
+  function showenggrade() {
+    
+    // if statement to check if option 1 (o level) is selected, and displays its grade options
+    if (showegrade[0].checked) {
+      eng1.style.display = "block";
+      eng2.style.display = "none";
+      eng3.style.display = "none";
+      eng1.value = "0";
+      eng2.value = "0";
+      eng3.value = "0";
+
+      // execute 'enableoption()' function to enable back the disabled field set previously
+      // refer to line 310 - 316
+      enableoption();
+
+      // execute 'reseteng()' function to remove all the displayed points, eligibility status and total points
+      // refer to line 321 - 325
+      reseteng();
+    }
+
+    // the concept above is repeated for the other 2 option
+    else if (showegrade[1].checked) {
+      eng1.style.display = "none";
+      eng2.style.display = "block";
+      eng3.style.display = "none";
+      eng1.value = "0";
+      eng2.value = "0";
+      eng3.value = "0";
+
+      enableoption();
+      reseteng();
+    }
+
+    else if (showegrade[2].checked) {
+      eng1.style.display = "none";
+      eng2.style.display = "none";
+      eng3.style.display = "block";
+      eng1.value = "0";
+      eng2.value = "0";
+      eng3.value = "0";
+
+      enableoption();
+      reseteng();
+    }
+
+    else {
+      eng1.style.display = "none";
+      eng2.style.display = "none";
+      eng3.style.display = "none";
+      engpoints.innerHTML = "";
+    }
+  }
+
+// -------------------------------------------------------------------------
+// the following function 'enableoption()' is used in 'showenggrade()' function
+
+  function enableoption() {
+    maths.disabled = false;
+    mathsgrade.disabled = false;
+    relevant1.disabled = false;
+    relevant1grade.disabled = false;
+    btnresult.disabled = false;
+  }
+
+// -------------------------------------------------------------------------
+// the following function 'reseteng()' is used in 'showenggrade()' function
+
+  function reseteng() {
+    engpoints.innerHTML = "";
+    displaystatus.innerHTML = "";
+    totalpoints.innerHTML = "";
+  }
+
+// -------------------------------------------------------------------------
+// the following function 'enggradepoints()' is used to check the selected english grade, and to display points
+
+  function enggradepoints() {
+
+    // if statement to check which english grade is selected 
+    if (showegrade[0].checked) {
+
+      // loop used to store and display points
+      // but in the case of default value being selected, it removes the points displayed
+      for (var i = 0 ; i < eng1.length ; i++) {
+
+        if (eng1[i].value == "0") {
+          engpoints.innerHTML = "";
+        }
+
+        // if selected, displays the points for the following grade and store the data into a number variable,
+        // which will be used later on to calculate total points
+        else if (eng1[i].selected) {
+          reseteng();
+          engpoints.innerHTML = i;
+          engp = Number(i);
+        }
+      }
+    }
+
+    // the block of codes above is used and repeated for the 2 other english grade option
+
+    else if (showegrade[1].checked) {
+      for (var i = 0 ; i < eng2.length ; i++) {
+        if (eng2[i].value == "0") {
+          engpoints.innerHTML = "";
+        }
+        else if (eng2[i].selected) {
+          reseteng();
+          engpoints.innerHTML = i;
+          engp = Number(i);
+        }
+      }
+    }
+
+    else if (showegrade[2].checked) {
+      for (var i = 0 ; i < eng3.length ; i++) {
+        if (eng3[i].value == "0") {
+          engpoints.innerHTML = "";
+        }
+        else if (eng3[i].selected) {
+          reseteng();
+          engpoints.innerHTML = i;
+          engp = Number(i);
+        }
+      }
+    }
+  }
+
+// -------------------------------------------------------------------------
+// the following function 'mathsgradepoints()' is used to grab user's maths grade
+
+  function mathsgradepoints() {
+
+    // loop to check which grade is selected
+    for (var i = 0 ; i < mathsgrade.length ; i++) {
+
+      // in the case of default value being selected, it just clears back the points
+      if (mathsgrade[i].value == "0") {
+        resetmaths();
+      }
+
+      // if a grade is selected other than above, it will display the points
+      // and also stores the number at the same time to count the total points accumulated
+      else if (mathsgrade[i].selected) {
+        resetmaths();
+        mathspoints.innerHTML = i;
+        mathsp = Number(i);
+      }
+
+      // note: refer to line 460 to for 'resetmaths()' description
+    }    
+  }
+
+// -------------------------------------------------------------------------
+// the following function 'disablemaths()' is used to disable the same maths option selected on the available relevant subject
+
+  function disablemaths() {
+
+    // first if statement is used to check if default value is selected, then no maths points will be shown
+    if (maths.value == "0") {
+      mathsgrade.value = "0";
+      resetmaths();
+      mathspoints.innerHTML = "";
+    }
+
+    // else, it will check if maths D is selected, which will disable add. maths option on relevant subjects
+    else if (maths.value == "mathematics D") {
+
+      mathsgrade.value = "0";
+      resetmaths();
+
+      // the following while loop is used to check for the same option but on the relevant section
+      for (var i = 0 ; i < relevant1.length ; i++ ) {
+
+        // since maths D is selected (line 418), the following if statement will set the same option
+        //under relevant option to disabled 
+        if (relevant1[i].value == "mathematics D") {
+          relevant1[i].disabled = true;
+        }
+
+        // while add. maths will be re-enabled
+        else if (relevant1[i].value == "additional mathematics") {
+          relevant1[i].disabled = false;
+        }
+      }
+    }
+
+    // lastly, it will check if add. maths is selected (line 441), which will disable maths D option on relevant subjects
+    // similar code from the previous block of codes (line 418 - 437) will be used, but vice versa
+    else if (maths.value == "additional mathematics") {
+
+      mathsgrade.value = "0";
+      resetmaths();
+
+      for (var i = 0 ; i < relevant1.length ; i++ ) {
+        if (relevant1[i].value == "additional mathematics") {
+          relevant1[i].disabled = true;
+        }
+        else if (relevant1[i].value == "mathematics D") {
+          relevant1[i].disabled = false;
+        }
+      }
+    }
+  }
+
+// -------------------------------------------------------------------------
+// the following function 'resetmaths()' is used to remove the displayed points, eligibility status and total points displayed for maths
+
+  function resetmaths() {
+    mathspoints.innerHTML = "";
+    displaystatus.innerHTML = "";
+    totalpoints.innerHTML = "";
+  }
+
+// ------------------------------------------------------------------------- 
+// the following function 'relevant1cs()' is used to disable specific grade for computer science option under relevant subject
+
+  function relevant1cs() {
+
+    // first if statement is created for default value
+    if (relevant1.value == "0") {
+      relevant1grade.value = "0";
+      resetrel();
+    }
+
+    // continued with checking for computer science
+    else if (relevant1.value == "computer sciences") {
+
+      relevant1grade.value = "0";
+      resetrel();
+
+      // the following loop is used to disable the targetted grade
+      for (var j = 0 ; j < relevant1grade.length ; j++) {
+        if (relevant1grade[j].value == "C5" || relevant1grade[j].value == "C6" || relevant1grade[j].value == "F") {
+          relevant1grade[j].disabled = true;
+        }
+        else {
+          relevant1grade[j].disabled = false;
+        }
+      }
+    }
+
+    // the following else will be used in the case of options other than computer science are being selected
+    // it re-enables the disabled relevant grade
+    else {
+
+      relevant1grade.value = "0";
+      resetrel();
+
+      for (var j = 0 ; j < relevant1grade.length ; j++) {
+        relevant1grade[j].disabled = false;
+      }
+    }
+
+    // note: refer to line 532 for function 'resetrel()' description
+  }
+
+// -------------------------------------------------------------------------
+// the following function 'relevantgradepoints()' is used to display the relevant option's grade
+
+  function relevantgradepoints() {
+
+    resetrel();
+
+    // the following loop is used to first check which grade is selected,
+    for (var i = 0 ; i < relevant1grade.length ; i++) {
+      if (relevant1grade.value == "0") {
+        resetrel();
+      }
+      // which then the points will be displayed, and also stored to count the total points for eligibility check
+      else if (relevant1grade[i].selected) {
+        relevant1points.innerHTML = i;
+        relevant1p = Number(i);
+      }
+    }
+  }
+
+// -------------------------------------------------------------------------
+// the following function 'resetrel()' is used to remove the displayed points, eligibility status and total points displayed for relevant1
+
+  function resetrel() {
+    relevant1points.innerHTML = "";
+    displaystatus.innerHTML = "";
+    totalpoints.innerHTML = "";
+  }
+
+// -------------------------------------------------------------------------
+// the following function 'eligibilitycheck()' is used to check user's eligibility status, one function that checked above and below 25 eligibility
+
+  function eligibilitycheck() {
+
+    // first if statement will be used to check if user is under25 or not
+    if (adult.options[adult.selectedIndex].value == "under25") {
+
+      // sums up the total points for all 3 subjects
+      totalp = engp + mathsp + relevant1p;
+
+      // if statement to check for empty/unfilled options, which will then display the desired message
+      if ((eng1.value == "0" && eng2.value == "0" && eng3.value == "0") || maths.value == "0" || relevant1.value == "0" || mathsgrade.value == "0" || relevant1grade.value == "0") {
+        displaystatus.innerHTML = "You did not specify all subjects!";
+        displaystatus.style.color = "red";
+      }
+
+      // if statement to check for less than or equals to 18 points options, which will then display the desired message of being eligible
+      else if (totalp <= 18) {
+        displaystatus.innerHTML = "Eligible";
+        displaystatus.style.color = "blue";
+        totalpoints.innerHTML = totalp;
+      }
+
+      // if statement to check for above 18 points options, which will then display the desired message of being uneligible
+      else if (totalp > 18) {
+        displaystatus.innerHTML = "Not Eligible";
+        displaystatus.style.color = "red";
+        totalpoints.innerHTML = totalp;
+      }
+    }
+
+    // note: similar concept from code above will be used for over25,
+    // the only difference is that over25 will not be checking the relevant option
+
+    // the following if is to check if user is over25
+    else if (adult.options[adult.selectedIndex].value == "over25") {
+
+      // counts the total for just english and maths
+      totalp = engp + mathsp;
+
+      if ((eng1.value == "0" && eng2.value == "0" && eng3.value == "0") || maths.value == "0" || mathsgrade.value == "0") {
+        displaystatus.innerHTML = "You did not specify all subjects!";
+        displaystatus.style.color = "red";
+      }
+      else if (totalp <= 12) {
+        displaystatus.innerHTML = "Eligible as matured applicants";
+        displaystatus.style.color = "blue";
+        totalpoints.innerHTML = totalp;
+      }
+      else if (totalp > 12) {
+        displaystatus.innerHTML = "Not Eligible due to points exceed 12";
+        displaystatus.style.color = "red";
+        totalpoints.innerHTML = totalp;
+      }
+    }
+  }
+
+// -------------------------------------------------------------------------
+// the following function 'resetform()' is used to reset the form whenever a user changes age option
+
+  function resetform() {
+
+    // resets all dropdown value to 0 (default value)
+    eng1.value = "0"; eng2.value = "0"; eng3.value = "0"; maths.value = "0"; mathsgrade.value = "0"; relevant1.value = "0"; relevant1grade.value = "0";
+
+    // resets all points to 0
+    totalp = 0; engp = 0; mathsp = 0; relevant1p = 0;
+
+    // unchecks radio button
+    showegrade[0].checked = false; showegrade[1].checked = false; showegrade[2].checked = false;
+
+    // reset english, maths and relevant1 points, eligibility status and total points accumulated
+    reseteng();
+    resetmaths();
+    resetrel();
+  }
+
+// -------------------------------------------------------------------------
+// the following function 'resetbutton()' is almost similar to 'resetform()' function
+// the difference is that reset button is used when reset button is clicked, which will reset all the progress made
+
+  function resetbutton() {
+    eng1.value = "0"; eng2.value = "0"; eng3.value = "0"; maths.value = "0"; mathsgrade.value = "0"; relevant1.value = "0"; relevant1grade.value = "0";
+
+    totalp = 0; engp = 0; mathsp = 0; relevant1p = 0;
+
+    showegrade[0].checked = false; showegrade[1].checked = false; showegrade[2].checked = false;
+
+    reseteng();
+    resetmaths();
+    resetrel();
+
+    // 'resetbutton()' function also disable back the options 
+    maths.disabled = true;
+    mathsgrade.disabled = true;
+    relevant1.disabled = true;
+    relevant1grade.disabled = true;
+    btnresult.disabled = true;
+
+    // hide back the grade dropdowns for english
+    eng1.style.display = "none";
+    eng2.style.display = "none";
+    eng3.style.display = "none";
+
+    // reset age option back to default
+    adult.value = "0";
+
+    // perform 'hideAllContent()' function created on line 175 - 183
+    hideAllContent();
+  }  
+
+// -------------------------------------------------------------------------
+
+
+
+</script>
+</body>
+</html>
